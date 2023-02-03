@@ -1,0 +1,21 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th >ID</th>
+      <th >Name</th>
+      <th> Entry Count</th>
+      <th >ADD</th>
+    </tr>
+  </thead>
+  <tbody>
+<%@employees.each do |emp|%>
+    <tr>
+      <td><%=emp.id%></td>
+      <td><%=link_to emp.name, emp%></td>
+      <td><%= emp.entry %></td>
+      <td><%=link_to "add entry", count_employee_path(emp.id)%></td>
+    </tr>
+<%end%>
+  </tbody>
+</table>
+<%= link_to "Add Employee", new_employee_path%>

@@ -73,4 +73,9 @@ end
 
 
 gem 'devise'
+
 gem 'cssbundling-rails'
+
+gem 'devise-bootstrap-views'
+
+gem 'iex-ruby-client'

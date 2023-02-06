@@ -31,6 +31,13 @@ class EmployeesController < ApplicationController
     redirect_to employees_path
   end
 
+  def remove
+    @employee = Employee.find(params[:id])
+    count = @employee.entry
+    @employee.update(entry: count - 1)
+    redirect_to employees_path
+  end
+
 
   def update
     @employee = Employee.find(params[:id])

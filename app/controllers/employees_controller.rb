@@ -1,6 +1,10 @@
 class EmployeesController < ApplicationController
   def index
     @employees = Employee.all
+    @employees.each do|emp|
+      id = emp.id
+      DeleteJob.set(wait: 24.hours).perform_later(id)
+    end
   end
 
   def show
@@ -14,6 +18,8 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.create(params_emp)
     if @employee.save
+      # WelcomeMailer.welcome_email.deliver_now
+      EmailJob.set(wait: 15.seconds).perform_later(@employee)
       redirect_to @employee
     else
       render :new, status: :unprocessable_entity
@@ -28,6 +34,15 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     count = @employee.entry
     @employee.update(entry: count + 1)
+    redirect_to employees_path
+  end
+
+  def remove
+    @employee = Employee.find(params[:id])
+    count = @employee.entry
+    if count > 0
+      @employee.update(entry: count - 1)
+    end
     redirect_to employees_path
   end
 

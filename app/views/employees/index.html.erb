@@ -1,10 +1,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th >ID</th>
-      <th >Name</th>
+      <th>ID</th>
+      <th>Name</th>
       <th> Entry Count</th>
-      <th >ADD</th>
+      <th>ADD</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -13,7 +14,8 @@
       <td><%=emp.id%></td>
       <td><%=link_to emp.name, emp%></td>
       <td><%= emp.entry %></td>
-      <td><%=link_to "add entry", count_employee_path(emp.id)%></td>
+      <td><%=link_to "add entry",count_employee_path(emp.id)%></td>
+      <td><%=link_to "Remove entry", remove_employee_path(emp.id)%></td>
     </tr>
 <%end%>
   </tbody>
